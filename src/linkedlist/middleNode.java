@@ -4,6 +4,7 @@ package linkedlist;
  * @Author Baker.chen
  * @create 2020/8/8 23:14
  *
+ * 链表的中间结点
  * 问题：返回链表的中间结点，如果有两个中间结点，则返回第二个中间结点。
  *
  *

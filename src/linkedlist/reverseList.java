@@ -14,7 +14,13 @@ package linkedlist;
  */
 public class reverseList {
 
-    public static ListNode test(ListNode head) {
+    /**
+     * 方法一：双指针法，新建一个链表，遍历当前链表每个节点，使用头插法插入
+     * 缺点：新开一个链表，占用额外的空间
+     * @param head
+     * @return
+     */
+    public static ListNode test1(ListNode head) {
         // 如果链表为空或者链表只有一个节点，那么就无需反转
         if (head.next ==null || head.next.next == null) {
             return head;
@@ -39,6 +45,36 @@ public class reverseList {
         return head;
     }
 
+    /**
+     * 方法二：使用三指针，一个指向当前节点，一个指向当前节点前一个节点，一个指向当前节点的后一个节点
+     * （之所以要有一个指针指向当前节点的后一个节点，是为了解决修改当前节点的指针域后链表断连的问题）
+     * @param head
+     * @return
+     */
+    public static ListNode test2(ListNode head) {
+        // 如果链表为空或者链表只有一个节点，那么就无需反转
+        if (head.next ==null || head.next.next == null) {
+            return head;
+        }
+        // 当前节点的前一个节点，初始为null
+        ListNode pre = null;
+        // 当前节点，初始为链表的第一个节点
+        ListNode cur = head.next;
+        // 当前节点的后一个节点，初始为链表的第二个节点
+        ListNode tail = head.next.next;
+        while (tail != null) {
+            cur.next = pre;
+            pre = cur;
+            cur = tail;
+            tail = tail.next;
+        }
+        // 注意：退出循环时，原链表最后一个节点还没有执行指向前一个节点的操作
+        cur.next = pre;
+        // 将头节点指向原链表的最后一个节点
+        head.next = cur;
+        return head;
+    }
+
     public static void main(String[] args) {
         LinkedListHandle handle = new LinkedListHandle();
         ListNode node1 = new ListNode(1);
@@ -55,7 +91,7 @@ public class reverseList {
         handle.show();
         System.out.println();
 
-        ListNode reverse = test(handle.getHead());
+        ListNode reverse = test2(handle.getHead());
         handle.setHead(reverse);
         handle.show();
     }
