@@ -2,15 +2,12 @@ package linkedlist;
 
 /**
  * @Author Baker.chen
- * @create 2020/8/7 11:47
- *
- * 节点类
+ * @create 2021/1/9 11:13
  */
 public class ListNode {
-    public Integer val;
-    public ListNode next;
+    int val;
+    ListNode next;
     public ListNode(int val) {
         this.val = val;
     }
-    public ListNode (){}
 }
