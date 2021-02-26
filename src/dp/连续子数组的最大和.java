@@ -15,14 +15,20 @@ package dp;
  *      解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
  *
  */
-public class MaxSubArray {
+public class 连续子数组的最大和 {
 
-    public static int test(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
+    /**
+     * 动态规划解法
+     * @param nums
+     * @return
+     */
+    public int test(int[] nums) {
+        // 创建一个dp一维数组，dp[i]表示以元素nums[i]为结尾的连续子数组的最大和
+        // 之所以必须包含元素nums[i]，是因为题目要求是“连续子数组”，这样才能保证dp[i]递推到dp[i+1]的正确性
         int[] dp = new int[nums.length];
+        // dp数组初始化
         dp[0] = nums[0];
+        // max用来记录最大值，不断更新
         int max = dp[0];
         for (int i = 1; i < nums.length; i++){
             // 如果dp[i-1]<0，那么不管nums[i]大于0还是小于0，dp[i]都等于num[i]
@@ -31,10 +37,5 @@ public class MaxSubArray {
             max = Math.max(max, dp[i]);
         }
         return max;
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
-        System.out.println(test(arr));
     }
 }

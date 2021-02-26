@@ -15,7 +15,7 @@ public class 整数拆分 {
         dp[2] = 1; // 2 = 1 + 1; 1 * 1 = 1
         // 3. 从前往后遍历
         for (int i = 3; i < n + 1; i++) {
-            for (int j = 1; j < i; j++) {
+            for (int j = 1; j < i - 1; j++) {
                 // 4. 递推公式
                 dp[i] = Math.max(dp[i], Math.max(j * (i - j), j * dp[i - j]));
             }

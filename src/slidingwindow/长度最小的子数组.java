@@ -2,7 +2,7 @@ package slidingwindow;
 
 public class 长度最小的子数组 {
     // 暴力解法：双重for循环
-    public static int minSubArrayLen1(int s, int[] nums) {
+    public int minSubArrayLen1(int s, int[] nums) {
         int sum = 0;
         int len = 0;
         for (int i = 0; i <nums.length; i++) {
@@ -18,8 +18,8 @@ public class 长度最小的子数组 {
         return len;
     }
 
-    // 滑动窗口
-    public static int minSubArrayLen2(int s, int[] nums) {
+    // 滑动窗口（滑动窗口的限制条件是：窗口内元素的总和大于等于s）
+    public int minSubArrayLen2(int s, int[] nums) {
         int sum = 0;
         int len = 0;
         int i = 0;//指定起始位置
@@ -31,10 +31,5 @@ public class 长度最小的子数组 {
             }
         }
         return len;
-    }
-
-    public static void main(String[] args) {
-        int[] nums = {2,3,1,2,4,3};
-        System.out.println(minSubArrayLen2(7, nums));
     }
 }
