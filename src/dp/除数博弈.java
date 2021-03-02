@@ -25,7 +25,7 @@ package dp;
  * 思路：通过多个例子可以归纳出当N为偶数时，爱丽丝获胜；当N为奇数时，爱丽丝失败
  *  这使用的是归纳法，动态规划实现这道题有点难理解~，这里不做展开~
  */
-public class DivisorGame {
+public class 除数博弈 {
 
     public static boolean test(int N) {
         return N % 2 == 0 ? true : false;
