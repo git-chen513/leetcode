@@ -58,7 +58,7 @@ public class 对称二叉树 {
         //调用递归函数，比较左节点，右节点
         return dfs(root.left,root.right);
     }
-    // 对根节点的左右子树进行判断
+    // 对根节点的左右子树进行判断（判断两颗树是否互为翻转）
     boolean dfs(TreeNode left, TreeNode right) {
         //递归的终止条件是两个节点都为空
         //或者两个节点中有一个为空

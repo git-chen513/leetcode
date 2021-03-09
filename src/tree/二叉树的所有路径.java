@@ -15,7 +15,7 @@ public class 二叉树的所有路径 {
      * @param root
      * @return
      */
-    public List<String> binaryTreePaths(TreeNode root) {
+    public List<String> binaryTreePaths1(TreeNode root) {
         List<String> list = new ArrayList<>();
         return binaryTreePaths(root, "", list);
     }
@@ -29,19 +29,62 @@ public class 二叉树的所有路径 {
             res.add(path);
         } else {
             path = path + "->";
-            // 递归处理左子树
+            // 递归处理左子树（这种传递变量的方式其实隐式的进行了回溯，因为每个path字符串递归结束之后的状态都不会影响下一个状态）
             binaryTreePaths(root.left, path, res);
             // 递归处理右子树
             binaryTreePaths(root.right, path, res);
         }
         return res;
     }
+
+    /**
+     * 回溯法：深度优先遍历（前序遍历）
+     * @param root
+     * @return
+     */
+    public List<String> binaryTreePaths2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        List<String> res = new ArrayList<>();
+        backtracking(root, list, res);
+        return res;
+    }
+    public void backtracking(TreeNode root, List<Integer> list, List<String> res) {
+        if (root == null) {
+            return;
+        }
+        // 先处理根节点
+        list.add(root.val);
+        // 递归终止的条件（遇到叶子节点）
+        if (root.left == null && root.right == null) {
+            String s = "";
+            for (int i = 0; i < list.size() - 1; i++) {
+                s += list.get(i) + "->";
+            }
+            s += list.get(list.size() - 1);
+            res.add(s);
+            // 记得return
+            return;
+        }
+        // 递归处理左子树
+        if (root.left != null) {
+            backtracking(root.left, list, res);
+            // 回溯
+            list.remove(list.size() - 1);
+        }
+        // 递归处理右子树
+        if (root.right != null) {
+            backtracking(root.right, list, res);
+            // 回溯
+            list.remove(list.size() - 1);
+        }
+    }
+
     /**
      * 迭代法：深度优先遍历（前序遍历）
      * @param root
      * @return
      */
-    public List<String> binaryTreePaths2(TreeNode root) {
+    public List<String> binaryTreePaths3(TreeNode root) {
         List<String> list = new ArrayList<>();
         if (root == null) {
             return list;
